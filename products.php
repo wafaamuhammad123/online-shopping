@@ -27,8 +27,10 @@ while ($row = mysqli_fetch_assoc($result)) {
   <div class='card-body'>
     <h5 class='card-title'>'$row[price]'</h5>
     <p class='card-text'>  '$row[name]'</p>
-    <a href='#' class='btn btn-primary'>edit</a>
-    <a href='#' class='btn btn-danger'> delete</a>
+    <a href='edit.php? id=$row[id]' class='btn btn-primary'>edit</a>
+    
+    <a href='delete.php? id=$row[id]' class='btn btn-danger'>Delete</a>
+    
   </div>
 </div>
 
