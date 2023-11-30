@@ -9,19 +9,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productName = $_POST['name'];
     $productPrice = $_POST['price'];
 
-    // Update the product in the database
-    $updateQuery = "UPDATE product SET name = '$productName',price = '$productPrice' WHERE id = $productId";
+    $IMAGE=$_POST['image'];
+    $IMAGE_LOCATION=$_FILES['image']['tmp_name'];
+    $IMAGE_NAME=$_FILES['image']['name'];
+    $IMAGE_FOLDER="images/".$IMAGE_NAME;
+    
+    $updateQuery = "UPDATE product SET name = '$productName', price = '$productPrice', image='$IMAGE_FOLDER' WHERE id = $productId";
     $updateResult = mysqli_query($con, $updateQuery);
 
-    if (!$updateResult) {
-        die("Update query failed: " . mysqli_error($con));
+    mysqli_query($con, $updateQuery);//to connect with db and insert the data in db
+    if(move_uploaded_file($IMAGE_LOCATION,'images/'.$IMAGE_NAME))//at uploading the files..save the img name in the folder imgs 
+    {
+          echo "<script>alert('Update successful');</script>";
+    } else {
+        echo "<script>alert('Update failed');</script>";
     }
 
-    // Redirect back to the product page after update
-    header("Location: products.php");
-    exit();
-} else {
-    // Redirect to the product page if the form is not submitted via POST
     header("Location: products.php");
     exit();
 }

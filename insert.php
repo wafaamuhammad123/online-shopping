@@ -5,6 +5,7 @@ if(isset($_POST['upload']))//when I press on this btn=> which has a name upload.
 {
     $NAME=$_POST['name'];
     $PRICE=$_POST['price'];
+    $IMAGE=$_POST['image'];
     $IMAGE_LOCATION=$_FILES['image']['tmp_name'];
     $IMAGE_NAME=$_FILES['image']['name'];
     $IMAGE_FOLDER="images/".$IMAGE_NAME; //when uploading any img.. save it in my folder images

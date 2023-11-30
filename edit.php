@@ -17,10 +17,8 @@ if (isset($_GET['id'])) {
 
     $productData = mysqli_fetch_assoc($selectResult);
 
-    // Display the edit form
     ?>
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -34,15 +32,21 @@ if (isset($_GET['id'])) {
     <body>
         <div class="container">
             <h2>Edit Product</h2>
-            <form action="update.php" method="post">
+            <form action="update.php" method="post" enctype="multipart/form-data">
               
                 <input type="hidden" name="id" value="<?php echo $productData['id']; ?>">
+
                 <label for="name">Product Name:</label>
                 <input type="text" id="name" name="name" value="<?php echo $productData['name']; ?>" required>
                 <br>
                 <label for="price">Product Price:</label>
                 <input type="text" id="price" name="price" value="<?php echo $productData['price']; ?>" required>
                 <br>
+                
+                <input type="file" id="file" name='image'> <!-- Removed unnecessary closing tag here -->
+                <br/>
+                <label for="file">Choose file</label><br/>
+
                 <button type="submit" class="btn btn-primary">Update Product</button>
             </form>
         </div>
